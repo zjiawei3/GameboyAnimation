@@ -1,0 +1,11 @@
+make
+(1)compile
+macro
+(1)#define ABS(x) ((x<0)?(-x):(x))
+(2)#define CTF(c) ((c)*9/5+32)
+(3)TIMESTWO(3)*TIMESTWO(3)=3+3*3+3=15!=12
+pointer
+(1)int* p=(int*)0xBAAABEEF
+(2)short* p=(short*)0x0CABCAFE
+(3)#define dereference
+(4)指示字运算

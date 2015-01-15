@@ -1,0 +1,244 @@
+===============================================================================
+CS-2110                           Homework 09                         Fall 2010
+===============================================================================
+
+This assignment is due by:
+	Day:	Tuesday, November 2th, 2010
+	Time:	11:55:00 PM
+
+===============================================================================
+	TURN IN THIS ASSIGNMENT ELECTRONICALLY USING T-SQUARE.
+	LATE SUBMISSIONS WILL NOT BE ACCEPTED.
+===============================================================================
+
+=========
+Overview:
+=========
+
+For this assignment, you will be writing a game in Mode 3.
+You can recreate any particular classic arcade game that you
+like, or you can make your own entirely new game. We have left this assignment
+very open ended, and we did it for two main reasons: First, it's a chance to explore
+your creative coding side, if you want, and second, we don't want to see 100
+copies of the exact same thing.
+
+
+======================================
+The Assignment
+======================================
+
+In the past, this assignment has required that students make a Space Invaders
+clone, and it usually works out well. In that Space Invaders clone, you have
+some group of aliens that move back and forth at the top of the screen. The
+player controls a ship that can only move left and right at the bottom and shoots
+ bullets. If a bullet the player shoots hits an alien, that alien disappears.
+If a bullet that one of the aliens shot hits the player's ship, they lose a life.
+Once all aliens are destroyed, that level is complete. If the player loses all
+lives, they get a game over screen. For more information see
+http://en.wikipedia.org/wiki/Space_Invaders
+
+Another idea that also typically works well is Breakout. Breakout is similar to
+a one-player pong game where the player tries to destroy bricks at the top of
+the screen. A ball initially starts on the player's paddle, and when they press
+a button the ball releases. It bounces off the left, right, and top walls as well
+as bricks and the player's paddle. If the ball hits the bottom wall, the player
+loses a life. If they player destroys all the bricks by hitting them, then that
+level is complete. If the player loses all lives, they get a game over screen.
+For more information see http://en.wikipedia.org/wiki/Breakout_%28arcade_game%29
+
+======================================
+Requirements
+======================================
+
+0) Your game must be in mode 3. (If you use any other mode more power to you but you will be 100% responsible for explaining how the mode works during the demo)   
+1) Use of buttons (What is a game without interaction)
+2) There must be a clear win/lose condition or infinite levels
+3) You must use an image and draw it via the function drawImage3
+4) Collision Detection via the function rectCollides.
+5) Your bounds for the screen must be checked
+6) There must be a Title screen and a Win/Lose screen
+7) There must be a way to reset the game
+8) Text
+9) You must follow C style conventions SEE Your code
+10) Be creative!!! We don't want to see space invaders or breakout 100 times.
+11) There must not be any noticeable tearing/flickering in your game.
+12) Though each person has the freedom to do what they wish, we do expect any game to be
+   about the same difficulty to code as space invaders or breakout.
+13) HAVE FUN!!! :D
+
+================================================
+Before you start / (Explanation of Requirements)
+================================================
+
+1)
+In myLib.h you should add these items:
+ - BUTTONS - The button register, located at 0x4000130
+ - BUTTONS - You should #define a value for each button, that can be used with
+             the KEY_DOWN_NOW macro. (example BUTTON_A, BUTTON_B, etc)
+ - KEY_DOWN_NOW - A macro you should #define that will take an integer value
+              representing a key and return true only if that key is currently
+              pressed.
+ - SCANLINECOUNTER - The scan line counter, located at 0x4000006
+ - Rect - A structure that knows its position and dimensions
+
+In myLib.c you should add these items:
+ - void waitForVBlank() {
+                 This function should return only when a VBlank has just started.
+    }
+
+2) Write the following functions Include these prototypes in your mylib.h and implement them in mylib.c
+/*
+ * Rectangular Collision Detection
+ * Rect a first object
+ * Rect b second object
+ * returns 1 if they are colliding 0 otherwise
+ */
+int rectCollides(Rect a, Rect b);
+
+/*
+ * Draws an image in mode3
+ * int x x coordinate 
+ * int y y coordinate
+ * int width Width of the image
+ * int height Height of the image
+ * const u16* pointer to the first element in the image
+ */
+void drawImage3(int x, int y, int width, int height, const u16* image);
+
+
+For drawImage3 you must find an image on the internet convert it into a C file there are many programs to do this usenti, jGrit, and BrandonTools. 
+Free Images for use 	
+http://www.gamedev.net/community/forums/topic.asp?topic_id=272386 
+http://gamemaking.indiangames.net/index_files/FreeSpritesforGames.htm
+
+3)
+For the text you MUST use our text.c and text.h provided in the assignment (Using the ones bill provides to do this will earn you a hefty penalty)
+
+text.c defines the array for all 256 ASCII character, where each bit represents 1 pixel
+The number of pixels per character (width and height) is defined in text.h
+text.h is your header file you should #include
+
+You need to write the two functions.  These can be written in the text.c file, and then you should include function prototypes in text.h
+		drawChar(int row, int col, char toDraw, u16 color)
+				this should take in a row, and column, char to draw and a color
+				then draw the specific pixels (in videoBuffer) to the screen with setPixel in that color
+				HINT:
+					if the corresponding bit of the array == 1 means set that pixel to that color
+					if the corresponding bit of the array == 0 means ignore
+		drawString(int row, int col, char *str, u16 color)
+				this should take in a string of characters and draw each character with drawChar
+  
+================================
+Your Code: (C Style Conventions)
+================================
+
+	You must define the following functions in the file that contain your main declaration.
+
+	initialize
+	clear
+	update
+	draw
+
+	initialize is responsible for setting up the game (put the player at the starting position).
+	clear is responsible for clearing the screen (word of warning do not set all of the pixels in the videoBuffer to black this is far too slow)
+	update is responsible for doing the game logic calculations i.e. button input moving enemies etc.
+	draw is responsible for drawing all objects on the screen.
+
+	your main should look like so.
+
+	int main(void)
+	{
+		/* Set up REG_DISPCNT */
+		initialize();
+		while(1)
+		{
+			waitForVBlank();
+			clear();
+			update();
+			draw();
+		}
+		
+		return 0;
+	}
+
+	Notes:
+	Only call waitForVBlank once per iteration of your while loop
+	DO NOT use floats or doubles in your code.  The ARM processor can not handle floating point numbers.
+	
+	Please follow C style conventions i.e. 
+
+	1) do not jam all of your code into one function
+	2) split your code into multiple files (have all of your game logic in your main file, library functions in myLib.c, etc)
+	3) comment your code, comment what each function does.
+	The better your code is the better your grade!
+
+	The better your game the better your grade.  The best games will be put into the hall of fame.
+	This means an unplayable game where the graphics are glitchy buttons do not work will get a lower score than a game that works and is fun.
+	However do not try to recreate World of Warcraft for this assignment don't be too ambitious.
+
+
+======================
+Optional (Extra Stuff)
+======================
+
+If you find that your game has graphical glitches then you will need to improve the efficiency of your code.
+If your bottleneck is your drawing code then it may be useful to use DMA to do your drawing.  DMA is not
+required for this assignment, but it will be for your next assignment. (If you choose to use DMA then that is an extra feature)
+
+You may choose to implement and take advantage of some of the other GBA hardware features.
+If you want to learn whats out there and what you can do read tonc (http://www.coranac.com/tonc/text/)
+I do not recommend that you try to implement sound in your game.
+
+==============
+Collaboration:
+==============
+
+You're more than welcome to work with other students as you have been on past
+assignments, however, you are not allowed to make the exact same game as those
+you're working with.
+
+=======
+A Note:
+=======
+
+In case you are unaware, the GameBoy Advance buttons correspond to the following keys
+on the keyboard.
+
+GameBoy | Keyboard
+--------|----------
+Start   | Enter
+Select  | Backspace
+A       | Z
+B       | X
+L       | A
+R       | S
+Left    | Left Arrow
+Right   | Right Arrow
+Up      | Up Arrow
+Down    | Down Arrow
+
+Additionally, holding the space bar will make the game run faster. This might
+be useful in testing, however the player should never have to hold down
+spacebar for the game to run properly and furthermore there is no space bar
+on the actual gba.
+
+===========
+Submission:
+===========
+Turn in all the files you have created and modified.  This will include:
+   - makefile
+   - and any files needed to compile your game
+
+If your code does not compile, you will receive a ZERO on this assignment.
+
+Also note:
+   - If you do not submit your modified makefile, your code will not compile and you
+     will get a zero
+   - This assignment WILL be graded by demo so watch out for the demo sign up page to
+     appear and sign up early
+   - If you do not attend your demo or do not sign up for a demo, you will get a zero
+     on this assignment.
+   - You may only reschedule or cancel your demo appointment at least 24 hours in advance of the demo
+   - It's a good idea to redownload and recompile your code once you've submitted it to t-square to make sure that it works
+
+

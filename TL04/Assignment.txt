@@ -1,0 +1,139 @@
+=======================================================================
+CS 2110                      Timed Lab #4                     Fall 2010
+=======================================================================
+
+   This assignment is due by:
+         Day:    Wednesday, November 10, 2010
+         Time:   Before the end of lab (4:25pm/5:55pm)
+         
+=======================================================================
+      TURN IN THIS ASSIGNMENT ELECTRONICALLY USING T-SQUARE.  
+         SUBMISSIONS WHICH ARE LATE WILL NOT BE ACCEPTED.
+=======================================================================
+
+===========================
+Preemptive Awesome Warning:
+===========================
+
+Any solution that does not compile will automatically recieve a zero
+there is no excuse that what you submit does not compile.
+Please check what you submit before and after you submit.
+
+You have been warned...
+
+================
+Your Assignment:
+================
+For this timed lab you will be writing a game of my choosing called
+SATLGIII! (or rather Super Awesome Timed Lab Go III!). Don't know how the game works? 
+then read on for a description!
+
+At the start the user is presented with a press start screen which I have
+given you in title.c/title.h The start screen image is an image that is 
+240x160 (that is the same size as the gameboy screen). Your first job is
+to draw this image onto the screen. You must implement
+the function drawTitle such that it draws the picture onto the screen.
+Note you will have to fix the prototype for this function so that it can 
+draw any title screen given to it!
+
+Once the user presses start the fun begins! Your next job is to 
+clear the screen. You must implement the function clearScreen to do this.
+
+The user is then presented with the awesome cursor which you can place anywhere
+on screen.
+
+Wherever the cursor is the final image gets revealed by the cursors location. 
+As you move the cursor the portion of the image the cursor is on is revealed.
+
+drawCursor which draws the portion of the image the cursor is on.
+
+So in summary here is what you are doing
+
+1) Complete the definitions and FIXME's in timedlablib.h and timedlablib.c
+2) Implement function drawTitle so that it draws the picture passed in (which is 240x160) onto the screen
+   You must fix the prototype for drawTitle to allow for this
+3) Implement function clearScreen which fills the videoBuffer with the color passed in
+4) Implement function drawCursor which draws a portion of the image on the screen as defined by the cursor.
+5) Write your game code that implements the game in function main.
+6) #include the appropriate header files in the correct places!
+7) Modify the makefile so that it compiles the program.
+
+Remember again noncompiling solutions are not awesome! and will recieve the not-so-awesome score of zero!
+
+======
+Files:
+======
+tl04.c - Contains Game Logic and function main
+title.c - Contains the title screen image (240x160)
+mystery.c - Contains the mystery image (240x160)
+timedlablib.c - Contains library functions
+
+mystery.h - Header File
+title.h - Header File
+timedlablib.h - Header File
+
+Makefile - Makefile which you will need to edit 
+
+
+===========================
+Penalties and Requirements:
+===========================
+1. Remember your code must compile when we test it (How many times will this be mentioned!)
+2. All of the images are not all one color (you will know if you are drawing it correctly that is)
+3. The cursor should be bounds checked (checking bounds is awesome guys!!)
+4. We DO NOT CARE about FLICKERING =D
+
+=================
+Timed Lab Policy:
+=================
+
+Questions: If you are unsure of what questions mean, the TA's will clarify them 
+    to the best of their ability. We will not be able to answer any questions about
+    how to reach a solution to the lab questions. For example, we can't answer the 
+    question "How do I use setPixel?" (that's what we're asking you), but we can
+    answer questions like "Can I add this function to my code?" and "Can you help 
+    me understand this error?"
+
+* You may use any of the following resources:
+     - the HAM tools and VBA emulator (invoked using the provided makefile)
+     - Any text editor (or IDE of your choosing that is available) (We recommend that you use gedit/CodeBlocks)
+     - The files we provided for this lab. They have all addresses and
+           general I/O and DMA routines that you need.
+     - Your mind
+     - Blank paper for scratch work
+
+* You may NOT use: 
+     - The Internet (except the T-Square Assignment page)
+     - Any files that you or anyone else has previously written (no home drive,
+            no previous T-Square submissions, NO existing files you can access)
+     - Textbook
+     - Notes
+     - Email
+     - IM
+     - Contact with any other person besides TAs
+                   
+* Failure to follow these rules will be violating the Georgia Tech Honor
+  Code. When in doubt, simply ask the TAs.
+
+*YOU MUST SUBMIT BY THE END OF YOUR LAB PERIOD. Bear in mind that the clock on your computer 
+may be a few minutes slow. T-Square has the multiple submissions option so don't be afraid 
+to resubmit if you fix something. You are supposed to have a full class period to work, and 
+we are letting you use the 15 minutes between classes to make sure you have submitted your work. 
+WE WILL NOT ACCEPT LATE SUBMISSIONS, be they 1 second or 1 hour late. 
+
+DO NOT HAVE ANY FILES OTHER THAN THE ABOVE OPEN!
+
+===========
+Submission:
+===========
+
+Make sure that you submit all of the following to T-Square by the end of the lab period:
+
+tl04.zip
+
+(As a nice bonus type make package to get tl04.zip be sure to check that this zip file has all of your files)
+	
+The TAs should be able to download your submission, type "make vba", and see your game running.
+Any submission that does not compile will receive a 0.
+
+YOU MUST BE IN LAB IN ORDER TO GET FULL CREDIT FOR YOUR SUBMISSION!
